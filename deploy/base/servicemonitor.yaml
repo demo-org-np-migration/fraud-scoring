@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fraud-scoring
+  labels:
+    app.kubernetes.io/name: fraud-scoring
+    app.kubernetes.io/part-of: cauri
+    cauri.io/team: risk
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: fraud-scoring
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

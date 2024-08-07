@@ -1,0 +1,6 @@
+SERVICE_NAME=fraud-scoring
+ENV=base
+LOG_LEVEL=info
+REDIS_URL=redis://redis:6379/0
+KEYCLOAK_ISSUER=http://keycloak.platform.svc:8080/realms/cauri-staging
+SENTINEL_URL=http://sandbox.sentinel-fraud.io
