@@ -1,0 +1,3 @@
+ENV=prod
+KEYCLOAK_ISSUER=http://keycloak.platform.svc:8080/realms/cauri-prod
+SENTINEL_URL=http://api.sentinel-fraud.io
