@@ -36,6 +36,23 @@ def test_score_without_token_is_401():
 def test_rules_without_token_is_401():
     resp = client.get("/v1/rules")
     assert resp.status_code == 401
+    # las convenciones internas de API §1: el body de error es plano, {"error": {"code", "message"}},
+    # no el {"detail": {...}} que arma FastAPI por defecto.
+    body = resp.json()
+    assert body["error"]["code"] == "unauthorized"
+    assert "message" in body["error"]
+
+
+def test_score_with_invalid_body_is_422_with_contract_envelope():
+    app.dependency_overrides[require_service_role] = lambda: {"realm_access": {"roles": ["service"]}}
+    try:
+        resp = client.post("/v1/score", json={"payment_id": "p1"})  # faltan campos requeridos
+        assert resp.status_code == 422
+        body = resp.json()
+        assert body["error"]["code"] == "validation_error"
+        assert "message" in body["error"]
+    finally:
+        app.dependency_overrides.pop(require_service_role, None)
 
 
 def test_score_happy_path_uses_vendor_and_velocity(monkeypatch):
