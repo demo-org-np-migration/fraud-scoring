@@ -60,6 +60,7 @@ def _decode_token(token: str) -> dict:
             key,
             algorithms=[header.get("alg", "RS256")],
             issuer=settings.keycloak_issuer,
+            # Keycloak no emite aud para client credentials; el contrato valida iss y firma
             options={"verify_aud": False},
         )
     except JOSEError as exc:

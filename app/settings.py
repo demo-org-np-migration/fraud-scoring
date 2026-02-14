@@ -8,7 +8,6 @@ from dataclasses import dataclass
 class Settings:
     service_name: str
     env: str
-    port: int
     log_level: str
     redis_url: str
     keycloak_issuer: str
@@ -17,10 +16,11 @@ class Settings:
 
 
 def load_settings() -> Settings:
+    # No hay campo `port`: las convenciones internas de API §1 fija el puerto HTTP en 8080 para todo
+    # servicio (ver EXPOSE en el Dockerfile); no es algo que este servicio decida.
     return Settings(
         service_name=os.environ.get("SERVICE_NAME", "fraud-scoring"),
         env=os.environ.get("ENV", "staging"),
-        port=int(os.environ.get("PORT", "8080")),
         log_level=os.environ.get("LOG_LEVEL", "info"),
         redis_url=os.environ.get("REDIS_URL", "redis://redis:6379/0"),
         keycloak_issuer=os.environ["KEYCLOAK_ISSUER"],
