@@ -4,14 +4,15 @@ kind: Kustomization
 namespace: prod
 
 resources:
-  - ../../base
+- ../../base
 
 images:
-  - name: ghcr.io/demo-org-np-migration/fraud-scoring
-    newTag: latest
+- name: ghcr.io/demo-org-np-migration/fraud-scoring
+  newName: ghcr.io/demo-org-np-migration/fraud-scoring
+  newTag: sha-e0963db
 
 configMapGenerator:
-  - name: fraud-scoring-config
-    behavior: merge
-    envs:
-      - config.yaml
+- behavior: merge
+  envs:
+  - config.yaml
+  name: fraud-scoring-config
