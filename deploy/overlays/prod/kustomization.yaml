@@ -9,7 +9,7 @@ resources:
 images:
 - name: ghcr.io/demo-org-np-migration/fraud-scoring
   newName: ghcr.io/demo-org-np-migration/fraud-scoring
-  newTag: sha-617dfce
+  newTag: sha-cb61515
 
 configMapGenerator:
 - behavior: merge
