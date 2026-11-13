@@ -1,3 +1,4 @@
 ENV=staging
 KEYCLOAK_ISSUER=http://keycloak.platform.svc:8080/realms/cauri-staging
 SENTINEL_URL=http://api.sentinel-fraud.io
+NP_TEST_W=w1
